@@ -1,29 +1,25 @@
 const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
 const cors = require('cors');
-
+const helmet = require('helmet');
 require('dotenv').config();
-
-const middlewares = require('./middlewares');
-const api = require('./api');
+const error = require('./error');
+const api = require('./api/route1');
 
 const app = express();
 
-app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
+    message: 'Hello Home'
   });
 });
 
-app.use('/api/v1', api);
+app.use('/data', api);
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+app.use(error.notFound);
+app.use(error.errorHandler);
 
 module.exports = app;

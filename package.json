@@ -1,19 +1,16 @@
 {
-  "name": "express-api-starter",
+  "name": "Raiveny back End",
   "version": "1.2.0",
-  "description": " A basic starter for an express.js API",
+  "description": " Raiveny Server ",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "lint": "eslint --fix src",
-    "test": "mocha --exit"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",
+  "author": "Hasan Mousa (Team[])",
   "repository": {
     "type": "git",
-    "url": "https://github.com/w3cj/express-api-starter.git"
+    "url": "https://github.com/Raiveny"
   },
   "license": "MIT",
   "dependencies": {
