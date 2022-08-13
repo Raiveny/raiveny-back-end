@@ -6,7 +6,7 @@ const axios = require('axios');
 const error = require('../error');
 
 const route2 = require('./route2');
-const { getData  , getDataAuth ,getDataID} = require('../module/medData');
+const { getData  , getDataAuth ,getDataID,getData2} = require('../module/medData');
 
 
 
@@ -27,9 +27,9 @@ class searchClass{
 router.get('/',getData ,getDataID);
 
 
-router.get('/id',getData);
+router.get('/id',getData2);
 
-router.get('/auth',getDataAuth);
+router.get('/history',getDataAuth);
 
 
 router.use('/route2', route2);

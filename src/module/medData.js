@@ -53,15 +53,10 @@ async function getData(req, res, next){
                         Data: docs[IDX]
                        });
                 }else{
-
-                        const options = {
+                    const options = {
                         method: 'GET',
-                        url: 'https://medius-disease-prediction.p.rapidapi.com/api/v2/disease-search',
-                        params: {
-                          query: `${req.query.query}`,
-                          birth_sex: 'UNK',
-                          age: `${req.query.age}`
-                        },
+                        url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
+                        params: {query: `${req.query.query}`},
                         headers: {
                           'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
                           'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
@@ -69,6 +64,7 @@ async function getData(req, res, next){
                       };
                        axios.request(options)
                         .then((response) => {
+                            flag = false
                             for (let index = 0; index < response.data.length; index++) {
                                 if(response.data[index].medius_id){
                                     cash[req.query.query.toLowerCase()] = response.data[index];
@@ -93,40 +89,40 @@ async function getData(req, res, next){
 
                 }
 
-              //  console.log("First function call : ", docs[IDX]);
             }
         });
     }else {
 
     if(cash[req.query.query.toLowerCase()] === undefined){
+        console.log(req.query.query)
         const options = {
-        method: 'GET',
-        url: 'https://medius-disease-prediction.p.rapidapi.com/api/v2/disease-search',
-        params: {
-          query: `${req.query.query}`,
-          birth_sex: 'UNK',
-          age: `${req.query.age}`
-        },
-        headers: {
-          'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
-          'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
-        }
-      };
-      await axios.request(options)
+            method: 'GET',
+            url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
+            params: {query: `${req.query.query}`},
+            headers: {
+              'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+              'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
+            }
+          };
+      //console.log(options)
+      axios.request(options)
         .then((response) => {
+            flag =false
+      
             for (let index = 0; index < response.data.length; index++) {
                 if(response.data[index].medius_id){
+                    console.log(response.data[index].medius_id)
                     cash[req.query.query.toLowerCase()] = response.data[index];
                     flag =true;
+                    break;         
                 }
-                break;         
             }
             if(flag){   
               next()
             }
             else{
             res.json({
-                    message: 'Sory, we can not find an Valid Value for this search'
+                    message: 'Sory, we can not find an Valid Value for this search here'
                    });
             }
         })
@@ -163,10 +159,10 @@ method: 'GET',
         await axios.get(`https://api.unsplash.com/search/photos?page=1&query=${req.query.query}&client_id=XB2Wty0BusZYwQyWD9CW8mErcWuEAya3C50vYjJdQps`)
         .then(value=>{
      
-             tempValue=value.data.results[index].urls.small;
+             tempValue=value.data.results[0].urls.small;
 
         }).catch(err=>{
-            tempValue = null
+            tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
         })
 
 
@@ -215,7 +211,7 @@ function getDataAuth(req,res){
    if(req.body.userEmail){
 
        const USER = mongoose.model('Model', schema, req.body.userEmail);
-        USER.find({ user_email: 'hassan#yahoo.com'}, function (err, docs) {
+        USER.find({ user_email: req.body.userEmail}, function (err, docs) {
             if (err){
                 console.log(err);
             }
@@ -236,6 +232,31 @@ function getDataAuth(req,res){
 
    
     }
+    function getData2(req,res){
+
+        
+        const options = {
+            method: 'GET',
+            url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
+            params: {query: 'headache'},
+            headers: {
+              'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+              'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
+            }
+          };
+          
+          axios.request(options).then(function (response) {
+              console.log(response.data);
+          }).catch(function (error) {
+              console.error(error);
+          });
+
+
+    res.json({
+        message : 'heelo '
+    })
+    }
+     
 
 
 
@@ -247,5 +268,6 @@ router.use(error.errorHandler);
 module.exports = {
     getData,
     getDataAuth,
-    getDataID
+    getDataID,
+    getData2
   };
