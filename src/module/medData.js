@@ -155,17 +155,20 @@ method: 'GET',
 
     for (let index = 0; index <Math.min(response.data.medications.length , 3); index++) {
 
-        let tempValue = "";
-        await axios.get(`https://api.unsplash.com/search/photos?page=1&query=${req.query.query}&client_id=XB2Wty0BusZYwQyWD9CW8mErcWuEAya3C50vYjJdQps`)
+        let tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
+        console.log('before axios')
+         await axios.get(`https://api.unsplash.com/search/photos?page=1&query=${response.data.medications[index].name}&client_id=XB2Wty0BusZYwQyWD9CW8mErcWuEAya3C50vYjJdQps`)
         .then(value=>{
-     
-             tempValue=value.data.results[0].urls.small;
+            //console.log(value.data.results[0].urls.small)
+            console.log('done')
+            tempValue=value.data.results[0].urls.small;
+             console.log('inside axios')
 
         }).catch(err=>{
             tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
         })
 
-
+        console.log('after Axiso')
         tempObj = {
             medication_Name :  response.data.medications[index].name,
             medication_Dosage : response.data.medications[index].dosage,
