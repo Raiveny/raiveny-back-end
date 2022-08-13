@@ -4,7 +4,7 @@
   "description": " Raiveny Server ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "Hasan Mousa (Team[])",
@@ -28,7 +28,6 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "mocha": "^10.0.0",
-    "nodemon": "^2.0.19",
     "supertest": "^6.2.4"
   }
 }
