@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 require('dotenv').config();
 const error = require('./error');
-const api = require('./api/route1');
+const api = require('./api/getData');
 
 const app = express();
 
