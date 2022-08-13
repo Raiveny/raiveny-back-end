@@ -1,6 +1,9 @@
 {
   "name": "Raiveny back End",
   "version": "1.2.0",
+  "engines": {
+    "node": "16.16.0"
+    },
   "description": " Raiveny Server ",
   "main": "index.js",
   "scripts": {
