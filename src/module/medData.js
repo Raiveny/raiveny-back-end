@@ -185,8 +185,8 @@ method: 'GET',
     const USER = mongoose.model('Model', schema, req.query.userEmail);
     const newUser = new USER({
         user_email: req.query.userEmail,
-        med_name: cash[req.query.query.toLowerCase()].name,
-        Medication: tempData
+        Name: cash[req.query.query.toLowerCase()].name,
+        medication: tempData
     });
     newUser.save().then(v =>{
         console.log('done')
