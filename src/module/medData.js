@@ -34,9 +34,9 @@ async function getData(req, res, next){
     let flag = false;
     let testFlag = false;
     let IDX;
-    if(req.body.userEmail){
-        const USER = mongoose.model('Model', schema, req.body.userEmail);
-        USER.find({ user_email: req.body.userEmail}, function (err, docs) {
+    if(req.query.userEmail){
+        const USER = mongoose.model('Model', schema, req.query.userEmail);
+        USER.find({ user_email: req.query.userEmail}, function (err, docs) {
             if (err){
                 res.json({
                     Data: "No user"
@@ -181,10 +181,10 @@ method: 'GET',
 
     // Just 5 Minutes 
 
-    if(req.body.userEmail){
-    const USER = mongoose.model('Model', schema, req.body.userEmail);
+    if(req.query.userEmail){
+    const USER = mongoose.model('Model', schema, req.query.userEmail);
     const newUser = new USER({
-        user_email: req.body.userEmail,
+        user_email: req.query.userEmail,
         med_name: cash[req.query.query.toLowerCase()].name,
         Medication: tempData
     });
@@ -209,12 +209,12 @@ method: 'GET',
 
 function getDataAuth(req,res){
 
-   // console.log(req.body)
+   // console.log(req.query)
    
-   if(req.body.userEmail){
+   if(req.query.userEmail){
 
-       const USER = mongoose.model('Model', schema, req.body.userEmail);
-        USER.find({ user_email: req.body.userEmail}, function (err, docs) {
+       const USER = mongoose.model('Model', schema, req.query.userEmail);
+        USER.find({ user_email: req.query.userEmail}, function (err, docs) {
             if (err){
                 console.log(err);
             }
