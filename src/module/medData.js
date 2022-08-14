@@ -44,7 +44,7 @@ async function getData(req, res, next){
             }
             else{
                 docs.forEach((element,index) => {
-                    if(element.med_name.includes(req.query.query.toLowerCase()))
+                    if(element.Name.includes(req.query.query.toLowerCase()))
                     testFlag = true;
                     IDX = index;
                 });
