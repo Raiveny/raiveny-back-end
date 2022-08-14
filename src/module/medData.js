@@ -39,7 +39,7 @@ async function getData(req, res, next){
         USER.find({ user_email: req.query.userEmail}, function (err, docs) {
             if (err){
                 res.json({
-                    Data: "No user"
+                    message: "No user"
                    });
             }
             else{
@@ -49,8 +49,11 @@ async function getData(req, res, next){
                     IDX = index;
                 });
                 if(testFlag){
+                  //  console.log(docs[IDX])
                     res.json({
-                        Data: docs[IDX]
+                        Name : docs[IDX].Name,
+                        user_email : docs[IDX].user_email,
+                        medication : docs[IDX].medication
                        });
                 }else{
                     const options = {
