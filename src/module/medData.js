@@ -20,6 +20,14 @@ mongoose.connect(uri ,{ useUnifiedTopology: true });
 
 
 const router = express.Router();
+ 
+class searchClass{
+  constructor(data){
+    this.name = data.name;
+    this.matched_text = data.matched_text;
+    this.medius_id = data.medius_id
+  }
+}
 
 async function getData(req, res, next){
     
@@ -50,7 +58,7 @@ async function getData(req, res, next){
                         url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
                         params: {query: `${req.query.query}`},
                         headers: {
-                          'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+                          'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
                           'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
                         }
                       };
@@ -75,7 +83,7 @@ async function getData(req, res, next){
                         })
                     .catch((error)=>{
                       res.json({
-                        message: 'there is an Error happend Here'
+                        message: error
                        });
                     });
 
@@ -92,10 +100,11 @@ async function getData(req, res, next){
             url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
             params: {query: `${req.query.query}`},
             headers: {
-              'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+              'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
               'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
             }
           };
+      //console.log(options)
       axios.request(options)
         .then((response) => {
             flag =false
@@ -119,7 +128,7 @@ async function getData(req, res, next){
         })
     .catch((error)=>{
       res.json({
-        message: 'there is an Error happend Here'
+        message: 'there is an Error happend Here 2'
        });
     });
     }else{
@@ -136,7 +145,7 @@ method: 'GET',
   url: `https://medius-disease-medication.p.rapidapi.com/api/v2/disease-medications/${cash[req.query.query.toLowerCase()].medius_id}`,
   params: {country: 'IN'},
     headers: {
-      'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+      'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
       'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
     }
   };
@@ -150,9 +159,11 @@ method: 'GET',
         console.log('before axios')
          await axios.get(`https://api.unsplash.com/search/photos?page=1&query=${response.data.medications[index].name}&client_id=XB2Wty0BusZYwQyWD9CW8mErcWuEAya3C50vYjJdQps`)
         .then(value=>{
+            //console.log(value.data.results[0].urls.small)
             console.log('done')
             tempValue=value.data.results[0].urls.small;
              console.log('inside axios')
+
         }).catch(err=>{
             tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
         })
@@ -232,7 +243,7 @@ function getDataAuth(req,res){
             url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
             params: {query: 'headache'},
             headers: {
-              'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+              'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
               'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
             }
           };
