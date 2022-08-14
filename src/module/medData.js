@@ -20,14 +20,6 @@ mongoose.connect(uri ,{ useUnifiedTopology: true });
 
 
 const router = express.Router();
- 
-class searchClass{
-  constructor(data){
-    this.name = data.name;
-    this.matched_text = data.matched_text;
-    this.medius_id = data.medius_id
-  }
-}
 
 async function getData(req, res, next){
     
@@ -104,7 +96,6 @@ async function getData(req, res, next){
               'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
             }
           };
-      //console.log(options)
       axios.request(options)
         .then((response) => {
             flag =false
@@ -159,11 +150,9 @@ method: 'GET',
         console.log('before axios')
          await axios.get(`https://api.unsplash.com/search/photos?page=1&query=${response.data.medications[index].name}&client_id=XB2Wty0BusZYwQyWD9CW8mErcWuEAya3C50vYjJdQps`)
         .then(value=>{
-            //console.log(value.data.results[0].urls.small)
             console.log('done')
             tempValue=value.data.results[0].urls.small;
              console.log('inside axios')
-
         }).catch(err=>{
             tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
         })
