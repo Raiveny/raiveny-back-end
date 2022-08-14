@@ -165,9 +165,9 @@ method: 'GET',
              console.log('inside axios')
 
         }).catch(err=>{
-            tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
+            tempValue = `https://i.postimg.cc/PxMty5dn/hasan.jpg%22%7D`;
         })
-
+//`https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`
         console.log('after Axiso')
         tempObj = {
             medication_Name :  response.data.medications[index].name,
