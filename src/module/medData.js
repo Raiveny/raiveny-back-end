@@ -49,11 +49,13 @@ async function getData(req, res, next){
                     IDX = index;
                 });
                 if(testFlag){
-                  //  console.log(docs[IDX])
+                    let data = docs[IDX] ;
+                    let arr  =data.medication.medication_Dosage.split(/[a-z]+\./gmi)
+                    data.medication.medication_Dosage = arr;
                     res.json({
-                        Name : docs[IDX].Name,
-                        user_email : docs[IDX].user_email,
-                        medication : docs[IDX].medication
+                        Name : data.Name,
+                        user_email : data.user_email,
+                        medication : data.medication
                        });
                 }else{
                     const options = {
@@ -165,16 +167,16 @@ method: 'GET',
             //console.log(value.data.results[0].urls.small)
             console.log('done')
             tempValue=value.data.results[0].urls.small;
-             console.log('inside axios')
+            
 
         }).catch(err=>{
-            tempValue = `https://i.postimg.cc/PxMty5dn/hasan.jpg%22%7D`;
+            tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
         })
-//`https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`
-        console.log('after Axiso')
+//
+    
         tempObj = {
             medication_Name :  response.data.medications[index].name,
-            medication_Dosage : response.data.medications[index].dosage,
+            medication_Dosage : response.data.medications[index].dosage.split(/[a-z]+\./gmi),
             medication_route : response.data.medications[index].route,
             medication_img : tempValue
         }
@@ -186,6 +188,7 @@ method: 'GET',
 
     if(req.query.userEmail){
     const USER = mongoose.model('Model', schema, req.query.userEmail);
+
     const newUser = new USER({
         user_email: req.query.userEmail,
         Name: cash[req.query.query.toLowerCase()].name,
