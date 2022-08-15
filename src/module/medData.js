@@ -34,23 +34,26 @@ async function getData(req, res, next){
     let flag = false;
     let testFlag = false;
     let IDX;
-    if(req.body.userEmail){
-        const USER = mongoose.model('Model', schema, req.body.userEmail);
-        USER.find({ user_email: req.body.userEmail}, function (err, docs) {
+    if(req.query.userEmail){
+        const USER = mongoose.model('Model', schema, req.query.userEmail);
+        USER.find({ user_email: req.query.userEmail}, function (err, docs) {
             if (err){
                 res.json({
-                    Data: "No user"
+                    message: "No user"
                    });
             }
             else{
                 docs.forEach((element,index) => {
-                    if(element.med_name.includes(req.query.query.toLowerCase()))
+                    if(element.Name.includes(req.query.query.toLowerCase()))
                     testFlag = true;
                     IDX = index;
                 });
                 if(testFlag){
+                    let data = docs[IDX] ;
                     res.json({
-                        Data: docs[IDX]
+                        Name : data.Name,
+                        user_email : data.user_email,
+                        medication : data.medication
                        });
                 }else{
                     const options = {
@@ -58,7 +61,7 @@ async function getData(req, res, next){
                         url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
                         params: {query: `${req.query.query}`},
                         headers: {
-                          'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+                          'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
                           'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
                         }
                       };
@@ -83,7 +86,7 @@ async function getData(req, res, next){
                         })
                     .catch((error)=>{
                       res.json({
-                        message: 'there is an Error happend Here'
+                        message: error
                        });
                     });
 
@@ -100,7 +103,7 @@ async function getData(req, res, next){
             url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
             params: {query: `${req.query.query}`},
             headers: {
-              'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+              'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
               'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
             }
           };
@@ -128,7 +131,7 @@ async function getData(req, res, next){
         })
     .catch((error)=>{
       res.json({
-        message: 'there is an Error happend Here'
+        message: 'there is an Error happend Here 2'
        });
     });
     }else{
@@ -145,7 +148,7 @@ method: 'GET',
   url: `https://medius-disease-medication.p.rapidapi.com/api/v2/disease-medications/${cash[req.query.query.toLowerCase()].medius_id}`,
   params: {country: 'IN'},
     headers: {
-      'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+      'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
       'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
     }
   };
@@ -162,16 +165,16 @@ method: 'GET',
             //console.log(value.data.results[0].urls.small)
             console.log('done')
             tempValue=value.data.results[0].urls.small;
-             console.log('inside axios')
+            
 
         }).catch(err=>{
             tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
         })
-
-        console.log('after Axiso')
+//
+    
         tempObj = {
             medication_Name :  response.data.medications[index].name,
-            medication_Dosage : response.data.medications[index].dosage,
+            medication_Dosage : response.data.medications[index].dosage.split(/[a-z]+\./gmi),
             medication_route : response.data.medications[index].route,
             medication_img : tempValue
         }
@@ -181,12 +184,13 @@ method: 'GET',
 
     // Just 5 Minutes 
 
-    if(req.body.userEmail){
-    const USER = mongoose.model('Model', schema, req.body.userEmail);
+    if(req.query.userEmail){
+    const USER = mongoose.model('Model', schema, req.query.userEmail);
+
     const newUser = new USER({
-        user_email: req.body.userEmail,
-        med_name: cash[req.query.query.toLowerCase()].name,
-        Medication: tempData
+        user_email: req.query.userEmail,
+        Name: cash[req.query.query.toLowerCase()].name,
+        medication: tempData
     });
     newUser.save().then(v =>{
         console.log('done')
@@ -209,12 +213,12 @@ method: 'GET',
 
 function getDataAuth(req,res){
 
-   // console.log(req.body)
+   // console.log(req.query)
    
-   if(req.body.userEmail){
+   if(req.query.userEmail){
 
-       const USER = mongoose.model('Model', schema, req.body.userEmail);
-        USER.find({ user_email: req.body.userEmail}, function (err, docs) {
+       const USER = mongoose.model('Model', schema, req.query.userEmail);
+        USER.find({ user_email: req.query.userEmail}, function (err, docs) {
             if (err){
                 console.log(err);
             }
@@ -243,7 +247,7 @@ function getDataAuth(req,res){
             url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
             params: {query: 'headache'},
             headers: {
-              'X-RapidAPI-Key': '658d9f8a13msh6c96f2c72936bbep19c408jsnd262b59a0bab',
+              'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
               'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
             }
           };
