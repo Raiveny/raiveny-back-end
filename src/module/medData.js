@@ -50,8 +50,6 @@ async function getData(req, res, next){
                 });
                 if(testFlag){
                     let data = docs[IDX] ;
-                    let arr  =data.medication.medication_Dosage.split(/[a-z]+\./gmi)
-                    data.medication.medication_Dosage = arr;
                     res.json({
                         Name : data.Name,
                         user_email : data.user_email,
