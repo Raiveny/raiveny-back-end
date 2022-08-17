@@ -61,7 +61,7 @@ async function getData(req, res, next){
                         url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
                         params: {query: `${req.query.query}`},
                         headers: {
-                          'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
+                          'X-RapidAPI-Key': 'db4a04a5d5msh539c2f283b1c336p170a00jsnb81e3ab0c98a',
                           'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
                         }
                       };
@@ -103,7 +103,7 @@ async function getData(req, res, next){
             url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
             params: {query: `${req.query.query}`},
             headers: {
-              'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
+              'X-RapidAPI-Key': 'db4a04a5d5msh539c2f283b1c336p170a00jsnb81e3ab0c98a',
               'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
             }
           };
@@ -148,7 +148,7 @@ method: 'GET',
   url: `https://medius-disease-medication.p.rapidapi.com/api/v2/disease-medications/${cash[req.query.query.toLowerCase()].medius_id}`,
   params: {country: 'IN'},
     headers: {
-      'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
+      'X-RapidAPI-Key': 'db4a04a5d5msh539c2f283b1c336p170a00jsnb81e3ab0c98a',
       'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
     }
   };
@@ -247,7 +247,7 @@ function getDataAuth(req,res){
             url: 'https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search',
             params: {query: 'headache'},
             headers: {
-              'X-RapidAPI-Key': '8d8d06962cmsh7dee8f3754f1715p1d48f1jsnaca4342b14f8',
+              'X-RapidAPI-Key': 'db4a04a5d5msh539c2f283b1c336p170a00jsnb81e3ab0c98a',
               'X-RapidAPI-Host': 'medius-disease-medication.p.rapidapi.com'
             }
           };
