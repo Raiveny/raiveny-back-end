@@ -158,7 +158,7 @@ method: 'GET',
 
     for (let index = 0; index <Math.min(response.data.medications.length , 3); index++) {
 
-        let tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
+        let tempValue = `https://cdnimg.royanews.tv/imageserv/Size728Q100/news/20190514/QW20Y79jrfBsSPsVQxLHeWFRh9vumDtVuoY2KATu.png`;
         console.log('before axios')
          await axios.get(`https://api.unsplash.com/search/photos?page=1&query=${response.data.medications[index].name}&client_id=XB2Wty0BusZYwQyWD9CW8mErcWuEAya3C50vYjJdQps`)
         .then(value=>{
@@ -168,7 +168,7 @@ method: 'GET',
             
 
         }).catch(err=>{
-            tempValue = `https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg`;
+            tempValue = `https://cdnimg.royanews.tv/imageserv/Size728Q100/news/20190514/QW20Y79jrfBsSPsVQxLHeWFRh9vumDtVuoY2KATu.png`;
         })
 //
     
